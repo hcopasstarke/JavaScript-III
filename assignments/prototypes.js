@@ -16,11 +16,13 @@
   * destroy() // prototype method that returns: `${this.name} was removed from the game.`
 */
 
-function GameObject(gameAttributes) {
-  this.createdAt = gameAttributes.createdAt;
-  this.dimensions = gameAttributes.dimensions;
+function GameObject(Attributes) {
+  this.createdAt = Attributes.createdAt;
+  this.name = Attributes.name;
+  this.dimensions = Attributes.dimensions;
 }
-GameObject.prototype.destroy = function () {
+
+GameObject.prototype.destroy = function (Attributes) {
   return `${this.name} was removed from the game.`;
 }
 
@@ -31,9 +33,9 @@ GameObject.prototype.destroy = function () {
   * should inherit destroy() from GameObject's prototype
 */
 
-function CharacterStats(charAttributes) {
-  this.healthPoints = charAttributes.healthPoints;
-  GameObject.call(this, charAttributes);
+function CharacterStats(Attributes) {
+  this.healthPoints = Attributes.healthPoints;
+  GameObject.call(this, Attributes);
 }
 
 CharacterStats.prototype = Object.create(GameObject.prototype);
@@ -52,11 +54,11 @@ CharacterStats.prototype.takeDamage = function () {
   * should inherit takeDamage() from CharacterStats
 */
 
-function Humanoid(humanAttributes) {
-  this.team = humanAttributes.team;
-  this.weapons = humanAttributes.weapons;
-  this.language = humanAttributes.language;
-  CharacterStats.call(this, humanAttributes);
+function Humanoid(Attributes) {
+  this.team = Attributes.team;
+  this.weapons = Attributes.weapons;
+  this.language = Attributes.language;
+  CharacterStats.call(this, Attributes);
 }
 
 Humanoid.prototype = Object.create(CharacterStats.prototype);
@@ -73,7 +75,7 @@ Humanoid.prototype.greet = function () {
 
 // Test you work by un-commenting these 3 objects and the list of console logs below:
 
-/
+
   const mage = new Humanoid({
     createdAt: new Date(),
     dimensions: {
